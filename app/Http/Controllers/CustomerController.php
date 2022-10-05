@@ -40,9 +40,8 @@ class CustomerController extends Controller
     {
         $include = explode(',', $request->input('include'));
 
-        $customer = Customer::when(in_array('customer-groups', $include), function ($query) {
-            $query->with('customerGroups');
-        })->find($id);
+        $customer = Customer::include($include)
+            ->find($id);
 
         return response()->json($customer);
     }

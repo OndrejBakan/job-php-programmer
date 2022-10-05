@@ -13,4 +13,13 @@ class Customer extends Model
     {
         return $this->belongsToMany(CustomerGroup::class);
     }
+
+    public function scopeInclude($query, $relations)
+    {
+         if (in_array('customer-groups', $relations)) {
+            $query->with('customerGroups');
+        }
+        
+        return $query;
+    }
 }
