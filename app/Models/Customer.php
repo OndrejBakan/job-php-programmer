@@ -16,7 +16,7 @@ class Customer extends Model
 
     public function scopeInclude($query, $relations)
     {
-         if (in_array('customer-groups', $relations)) {
+        if (in_array('customer-groups', $relations)) {
             $query->with('customerGroups');
         }
         
