@@ -11,6 +11,10 @@ class Customer extends Model
 {
     use HasFactory;
 
+    public $fillable = [
+        'name',
+    ];
+
     public function customerGroups(): BelongsToMany
     {
         return $this->belongsToMany(CustomerGroup::class);

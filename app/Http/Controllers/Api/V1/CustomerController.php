@@ -14,7 +14,7 @@ class CustomerController extends Controller
     public function index()
     {
         return response()->json(
-            Customer::paginate(10)
+            Customer::all()
         );
     }
 
@@ -23,9 +23,13 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|max:255'
+        $validated = $request->validate([
+            'name' => 'required|max:255',
         ]);
+
+        $customer = Customer::create($validated);
+
+        return response()->json($customer);
     }
 
     /**
@@ -43,11 +47,15 @@ class CustomerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Customer $customer)
     {
-        $request->validate([
-            'name' => 'required|max:255'
+        $validated = $request->validate([
+            'name' => 'required|max:255',
         ]);
+
+        $customer->update($validated);
+
+        return response()->json($customer);
     }
 
     /**
