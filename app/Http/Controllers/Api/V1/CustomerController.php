@@ -4,14 +4,16 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class CustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): JsonResponse
     {
         return response()->json(
             Customer::all()
@@ -21,7 +23,7 @@ class CustomerController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         $validated = $request->validate([
             'name' => 'required|max:255',
@@ -35,7 +37,7 @@ class CustomerController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $request, int $id)
+    public function show(Request $request, int $id): JsonResponse
     {
         $relations = explode(',', $request->input('include'));
 
@@ -47,7 +49,7 @@ class CustomerController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Customer $customer)
+    public function update(Request $request, Customer $customer): JsonResponse
     {
         $validated = $request->validate([
             'name' => 'required|max:255',
@@ -61,8 +63,50 @@ class CustomerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Customer $customer)
+    public function destroy(Customer $customer): JsonResponse
     {
         return response()->json($customer->delete());
+    }
+
+    public function attachCustomerGroups(Request $request, Customer $customer): JsonResponse
+    {
+        $validated = $request->validate([
+            'customer_groups.*' => 'array:id',
+            'customer_groups.*.id' => 'distinct',
+        ]);
+
+        $customer->customerGroups()->attach(
+            Arr::pluck($validated['customer_groups'], 'id')
+        );
+
+        return response()->json($customer->load('customerGroups'));
+    }
+
+    public function detachCustomerGroups(Request $request, Customer $customer): JsonResponse
+    {
+        $validated = $request->validate([
+            'customer_groups.*' => 'array:id',
+            'customer_groups.*.id' => 'distinct',
+        ]);
+
+        $customer->customerGroups()->detach(
+            Arr::pluck($validated['customer_groups'], 'id')
+        );
+
+        return response()->json($customer->load('customerGroups'));
+    }
+
+    public function syncCustomerGroups(Request $request, Customer $customer): JsonResponse
+    {
+        $validated = $request->validate([
+            'customer_groups.*' => 'array:id',
+            'customer_groups.*.id' => 'distinct',
+        ]);
+
+        $customer->customerGroups()->sync(
+            Arr::pluck($validated['customer_groups'], 'id')
+        );
+
+        return response()->json($customer->load('customerGroups'));
     }
 }
