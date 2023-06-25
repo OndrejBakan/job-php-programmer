@@ -20,36 +20,44 @@ This is my take at the simplo-sro/job-php-programmer task. The original assignme
 > - Inputs must be validated.
 > Use PORTO architecture (and Repository Pattern, optionally) for bonus points.
 
-  
 
 ## Installation
 
 - Clone this repository:
-`git clone https://github.com/OndrejBakan/job-php-programmer.git`
+
+  `git clone https://github.com/OndrejBakan/job-php-programmer.git`
 
 - Switch to the project folder:
-`cd job-php-programmer`
+
+  `cd job-php-programmer`
 
 - Install dependencies using composer:
-`composer install`
+
+  `composer install`
 
 - Copy .env file:
-`cp .env.example .env`
+
+  `cp .env.example .env`
 
 - Change these lines to use SQLite for quickstart:
-```
-DB_CONNECTION=sqlite
-DB_DATABASE=..\database\database.sqlite
-```
+
+  ```
+  DB_CONNECTION=sqlite
+  DB_DATABASE=..\database\database.sqlite
+  ```
 
 - Generate application key:
-`php artisan key:generate`
+
+  `php artisan key:generate`
 
 - Run database migrations:
-`php artisan migrate`
+
+  `php artisan migrate`
 
 - Run database seeders:
-`php artisan db:seed`
+
+  `php artisan db:seed`
 
 - Start the local development server:
-`php artisan serve`
+
+  `php artisan serve`
