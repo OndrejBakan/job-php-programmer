@@ -3,7 +3,7 @@
 
 ## Overview
 
-This is my take at the simplo-sro/job-php-programmer task. The original assignment is:
+This is my take at the [simplo-sro/job-php-programmer](https://github.com/simplo-sro/job-php-programmer) task. The original assignment is:
 
 > Create a simple Laravel application that would serve as an API. The application will be used to manage customers. The proposed API should meet all REST principles and use JSON for data exchange.
 > 
