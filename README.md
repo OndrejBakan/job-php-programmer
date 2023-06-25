@@ -20,7 +20,6 @@ This is my take at the [simplo-sro/job-php-programmer](https://github.com/simplo
 > - Inputs must be validated.
 > Use PORTO architecture (and Repository Pattern, optionally) for bonus points.
 
-
 ## Installation
 
 - Clone this repository:
@@ -61,3 +60,8 @@ This is my take at the [simplo-sro/job-php-programmer](https://github.com/simplo
 - Start the local development server:
 
   `php artisan serve`
+
+## Technologies
+- laravel/framework
+- laravel/pint
+- [Debugbar for Laravel](https://github.com/barryvdh/laravel-debugbar)
