@@ -61,6 +61,9 @@ This is my take at the [simplo-sro/job-php-programmer](https://github.com/simplo
 
   `php artisan serve`
 
+## Usage
+
+
 ## Technologies
 - laravel/framework
 - laravel/pint
