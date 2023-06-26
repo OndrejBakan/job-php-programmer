@@ -62,7 +62,7 @@ This is my take at the [simplo-sro/job-php-programmer](https://github.com/simplo
   `php artisan serve`
 
 ## Usage
-
+[Swagger](https://ondrejbakan.github.io/job-php-programmer)
 
 ## Technologies
 - laravel/framework
