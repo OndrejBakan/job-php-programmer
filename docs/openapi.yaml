@@ -4,7 +4,10 @@ info:
   description: My take at the simplo-sro/job-php-programmer task.
   version: 1.0.0
 servers:
+  - url: https://job-php-programmer.162-19-245-187.bakan.cz/api/v1
+    description: Demo server. Database gets refreshed every hour.
   - url: http://127.0.0.1:8000/api/v1
+    description: For local testing.
 paths:
   /customers:
     get:
