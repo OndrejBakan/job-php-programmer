@@ -64,12 +64,12 @@ class CustomerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Customer $customer): Response
+    public function destroy(Customer $customer): JsonResponse
     {
         if ($customer->delete())
             return response()->json([], 200);
         
-        return response()->notFound();
+        return response()->json([], 404);
     }
 
     public function attachCustomerGroups(Request $request, Customer $customer): JsonResponse
