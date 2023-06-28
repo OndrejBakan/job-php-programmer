@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
 
 class CustomerController extends Controller
@@ -41,7 +42,7 @@ class CustomerController extends Controller
     {
         $relations = explode(',', $request->input('include'));
 
-        $customer = Customer::include($relations)->find($id);
+        $customer = Customer::include($relations)->findOrFail($id);
 
         return response()->json($customer);
     }
@@ -63,9 +64,12 @@ class CustomerController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Customer $customer): JsonResponse
+    public function destroy(Customer $customer): Response
     {
-        return response()->json($customer->delete());
+        if ($customer->delete())
+            return response()->json([], 200);
+        
+        return response()->notFound();
     }
 
     public function attachCustomerGroups(Request $request, Customer $customer): JsonResponse
