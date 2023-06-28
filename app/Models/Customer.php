@@ -15,20 +15,33 @@ class Customer extends Model
         'name',
     ];
 
+    /**
+     * @return BelongsToMany<CustomerGroup>
+     */
     public function customerGroups(): BelongsToMany
     {
         return $this->belongsToMany(CustomerGroup::class);
     }
 
-    public function scopeInclude(Builder $query, $relations)
+    /**
+     * @param Builder<Customer> $query
+     * @param string|array<int, string> $relations
+     */
+    public function scopeInclude(Builder $query, array|string $relations): void
     {
         $allowedRelations = [
             'customerGroups',
         ];
 
-        foreach ($relations as $relation) {
-            if (in_array($relation, $allowedRelations)) {
-                $query->with($relation);
+        if (is_array($relations)) {
+            foreach ($relations as $relation) {
+                if (in_array($relation, $allowedRelations)) {
+                    $query->with($relation);
+                }
+            }
+        } else {
+            if (in_array($relations, $allowedRelations)) {
+                $query->with($relations);
             }
         }
     }
