@@ -10,6 +10,9 @@ class CustomerGroup extends Model
 {
     use HasFactory;
 
+    /**
+     * @return BelongsToMany<Customer>
+     */
     public function customers(): BelongsToMany
     {
         return $this->belongsToMany(Customer::class);
