@@ -15,6 +15,8 @@ class Customer extends Model
         'name',
     ];
 
+    protected $hidden = ['pivot'];
+
     /**
      * @return BelongsToMany<CustomerGroup>
      */

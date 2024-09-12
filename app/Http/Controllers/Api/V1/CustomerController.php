@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\CustomerCollection;
+use App\Http\Resources\CustomerResource;
 use App\Models\Customer;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -14,11 +16,12 @@ class CustomerController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): JsonResponse
+    public function index(Request $request): CustomerCollection
     {
-        return response()->json(
-            Customer::all()
-        );
+        $relations = explode(',', $request->input('include'));
+        $customers = Customer::include($relations)->get();
+
+        return new CustomerCollection($customers);
     }
 
     /**
@@ -38,13 +41,13 @@ class CustomerController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $request, int $id): JsonResponse
+    public function show(Request $request, int $id): JsonResponse | CustomerResource
     {
         $relations = explode(',', $request->input('include'));
 
         $customer = Customer::include($relations)->findOrFail($id);
 
-        return response()->json($customer);
+        return new CustomerResource($customer);
     }
 
     /**

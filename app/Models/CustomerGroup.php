@@ -10,6 +10,8 @@ class CustomerGroup extends Model
 {
     use HasFactory;
 
+    protected $hidden = ['pivot'];
+
     /**
      * @return BelongsToMany<Customer>
      */
