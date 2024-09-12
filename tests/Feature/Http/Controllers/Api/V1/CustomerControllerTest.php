@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Http\Controllers\Api\V1;
 
 use App\Models\Customer;
 use App\Models\CustomerGroup;
